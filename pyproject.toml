@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "password-generator"
+version = "0.1.0"
+description = ""
+authors = ["Jibe7 https://github.com/Jibe7"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+customtkinter = "^5.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
