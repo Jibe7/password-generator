@@ -1,5 +1,5 @@
 ## Project State
-Far from finished but it is functionnal : you can generate a password of desired length from a .exe file.
+Functionnal : you can generate a password of desired length from a .exe file and choose with check boxes what characters the password has.
 I want to learn making desktop application as well as web dev but I will prioritize the latest so this project may stay paused like that for some time. 
 # Project Motivation
 - I know there exist reliable and secure software that generates and store securately passwords, I would recommend to check : https://github.com/Lissy93/awesome-privacy and Dashlane or Bitwarden for your personnal use.
@@ -7,3 +7,10 @@ I want to learn making desktop application as well as web dev but I will priorit
 ## Project Goals
 1. Create a basic .exe app to generate random passwords of desired length ✅
 2. Add settings property such as choosing if the password has numbers, uppercase, lowercase, special characters.
+
+
+## Project Result
+Currently (v2) we can generate a 'customized' password. We can choose its length and some of the characters that it posess (lower, uppercase, numbers, special characters).
+It was exactly what I wanted.
+This is the current result of this project :
+![Version 2](v2.png)
