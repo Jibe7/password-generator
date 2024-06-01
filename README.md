@@ -14,3 +14,8 @@ Currently (v2) we can generate a 'customized' password. We can choose its length
 It was exactly what I wanted.
 This is the current result of this project :
 ![Version 2](v2.png)
+
+
+### Improvement
+- I looked upon refactorizing the code (the part with the character customization options for the password) but it appeared that it created more complexity than keeping it like that. So in the end, as the application will not scale more than what it currently is I decided to keep it like that.
+- However this project is a good opportunity to test automatic testing with pytest and github so I will try to setup such a system. 

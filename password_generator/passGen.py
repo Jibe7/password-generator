@@ -10,6 +10,22 @@ import secrets
 DEFAULT_WIDTH = 400
 DEFAULT_HEIGHT = 400
 
+class CharactersCustomization(customtkinter.CTkFrame):
+    def __init__(self, master : customtkinter.CTk, text : str, characters : str, row : int, column : int, padx : tuple[int, int], pady : tuple[int, int], defaultToggle : bool = False):
+        super().__init__(master)
+        self.checkBox = customtkinter.CTkCheckBox(self,
+            text = text,
+            onvalue = True,
+            offvalue = False
+        )
+        self.checkBox.grid(row=row, column=column, padx=padx, pady=pady)
+        if defaultToggle:
+            self.checkBox.toggle()
+            pass
+        self.characters = characters
+
+
+
 class PasswordGenerator(customtkinter.CTk):
     """ Class that creates a Python GUI interface using customtkinter. Allow to create passwords with customization on its size and characters. 
     
@@ -34,14 +50,9 @@ class PasswordGenerator(customtkinter.CTk):
 
 
         # Password Characters Customization
-        self.lowercasesCheckBox = customtkinter.CTkCheckBox(self,
-            text = "Use lowercases",
-            onvalue = True,
-            offvalue = False
-        )
-        self.lowercasesCheckBox.toggle()
-        self.lowercasesCheckBox.grid(row=1, column=0, padx=(0, 40), pady=(0, 20))
-        
+        self.AllCheckBox = CharactersCustomization(self, "Use lowercases", string.ascii_lowercase, row=1, column=0, padx=(0, 40), pady=(0, 20), defaultToggle=True) 
+        self.AllCheckBox.grid(row=1, column=0, padx=(0, 0), pady=(0, 20))
+
         self.uppercasesCheckBox = customtkinter.CTkCheckBox(self,
             text = "Use uppercases",
             onvalue = True,
@@ -82,7 +93,7 @@ class PasswordGenerator(customtkinter.CTk):
         self.password = ""
 
 
-    def basicPassGen(self, size : int = 15 ) -> None:
+    def basicPassGen(self, size : int = 15) -> None:
         """ This function generates a password and displays it on a CTkTextbox.
 
         Parameter
@@ -97,7 +108,7 @@ class PasswordGenerator(customtkinter.CTk):
                 size = 15
 
         alphabet = ""
-        if self.lowercasesCheckBox.get():
+        if self.lowercasesCheckBox.checkBox.get():
             alphabet += string.ascii_lowercase
         if self.uppercasesCheckBox.get():
             alphabet += string.ascii_uppercase
