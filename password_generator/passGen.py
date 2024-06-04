@@ -1,3 +1,10 @@
+""" Module containing the password generator application.
+
+Uses customtkinter, screeninfo, string and secrets modules.
+
+
+"""
+
 import customtkinter
 
 customtkinter.set_appearance_mode('System')
@@ -11,6 +18,9 @@ DEFAULT_WIDTH = 400
 DEFAULT_HEIGHT = 400
 
 class CharactersCustomization(customtkinter.CTkFrame):
+    """ Represents a toggle button on the GUI that controls an option regarding the choice of the characters included in the passwords.
+    
+    """
     def __init__(self, master : customtkinter.CTk, text : str, characters : str, row : int, column : int, padx : tuple[int, int], pady : tuple[int, int], defaultToggle : bool = False):
         super().__init__(master)
         self.checkBox = customtkinter.CTkCheckBox(self,
@@ -23,8 +33,6 @@ class CharactersCustomization(customtkinter.CTkFrame):
             self.checkBox.toggle()
             pass
         self.characters = characters
-
-
 
 class PasswordGenerator(customtkinter.CTk):
     """ Class that creates a Python GUI interface using customtkinter. Allow to create passwords with customization on its size and characters. 
@@ -50,28 +58,25 @@ class PasswordGenerator(customtkinter.CTk):
 
 
         # Password Characters Customization
-        self.AllCheckBox = CharactersCustomization(self, "Use lowercases", string.ascii_lowercase, row=1, column=0, padx=(0, 40), pady=(0, 20), defaultToggle=True) 
-        self.AllCheckBox.grid(row=1, column=0, padx=(0, 0), pady=(0, 20))
+        self.lowerCasesCheckBox = CharactersCustomization(self, "Use lowercases", string.ascii_lowercase, row=1, column=0, padx=(0, 40), pady=(0, 20), defaultToggle=True) 
+        self.lowerCasesCheckBox.grid(row=1, column=0, padx=(0, 0), pady=(0, 20))
 
-        self.uppercasesCheckBox = customtkinter.CTkCheckBox(self,
-            text = "Use uppercases",
-            onvalue = True,
-            offvalue = False
-        )
-        self.uppercasesCheckBox.grid(row=2, column=0, padx=(0, 40), pady=(0, 20))
+        self.upperCasesCheckBox = CharactersCustomization(self, 
+        "Use uppercases",
+        string.ascii_uppercase,
+        row=2, column=0, padx=(0, 40), pady=(0,20), defaultToggle=False) 
+        self.upperCasesCheckBox.grid(row=2, column=0, padx=(0, 0), pady=(0, 20))
         
-        self.digitsCheckBox = customtkinter.CTkCheckBox(self,
-            text = "Use numbers",
-            onvalue = True,
-            offvalue = False
-        )
-        self.digitsCheckBox.grid(row=3, column=0, padx=(0, 55), pady=(0, 20))
+        self.digitsCheckBox = CharactersCustomization(self,
+        "Use numbers",
+        string.digits,                                              
+        row=3, column=0, padx=(0, 55), pady=(0, 20)) 
+        self.digitsCheckBox.grid(row=3, column=0, padx=(0, 0), pady=(0, 20))
         
-        self.punctuationCheckBox = customtkinter.CTkCheckBox(self,
-            text = "Use special characters",
-            onvalue = True,
-            offvalue = False
-        )
+        self.punctuationCheckBox = CharactersCustomization(self,
+        "Use special characters",
+        string.punctuation,
+        row=4, column=0, padx=(0, 0), pady=(0, 20)) 
         self.punctuationCheckBox.grid(row=4, column=0, padx=(0, 0), pady=(0, 20))
 
         # Generate Password Button
@@ -106,15 +111,16 @@ class PasswordGenerator(customtkinter.CTk):
                 size = int(size)
             except:
                 size = 15
+        size = abs(size)
 
         alphabet = ""
-        if self.lowercasesCheckBox.checkBox.get():
+        if self.lowerCasesCheckBox.checkBox.get():
             alphabet += string.ascii_lowercase
-        if self.uppercasesCheckBox.get():
+        if self.upperCasesCheckBox.checkBox.get():
             alphabet += string.ascii_uppercase
-        if self.digitsCheckBox.get():
+        if self.digitsCheckBox.checkBox.get():
             alphabet += string.digits
-        if self.punctuationCheckBox.get():
+        if self.punctuationCheckBox.checkBox.get():
             alphabet += string.punctuation
         
         if alphabet == "":
@@ -133,5 +139,6 @@ class PasswordGenerator(customtkinter.CTk):
         self.label.insert("0.0", self.password)
         # self.label.configure(state="disabled") # enable or disable the right of the user to modify the generated password
 
-app = PasswordGenerator()
-app.mainloop()
+if __name__ == "__main__":
+    app = PasswordGenerator()
+    app.mainloop()

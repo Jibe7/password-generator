@@ -2,14 +2,18 @@
 name = "password-generator"
 version = "0.1.0"
 description = ""
-authors = ["Jibe7 https://github.com/Jibe7"]
+authors = ["Jibe7 <https://github.com/Jibe7 @a.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
 customtkinter = "^5.2.2"
 screeninfo = "^0.8.1"
+pytest = "^8.2.2"
 
+
+[tool.poetry.group.dev.dependencies]
+tox = "^4.15.0"
 
 [build-system]
 requires = ["poetry-core"]
