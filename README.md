@@ -6,6 +6,7 @@ Functionnal : you can generate a password of desired length from a .exe file and
 ## Project Goals
 1. Create a basic .exe app to generate random passwords of desired length. ✅
 2. Add settings property such as choosing if the password has numbers, uppercase, lowercase, special characters. ✅
+3. Added some testing with pytest / tox and automatic testing with github actions. ✅
 
 
 ## Project Result
@@ -13,7 +14,6 @@ Currently (v2) we can generate a 'customized' password. We can choose its length
 It was exactly what I wanted.
 This is the current result of this project :
 ![Version 2](v2.png)
+Note : last updated version is not in the .exe file but they have no differences in terms of functionnality, the code has just been 'refactored' using a class.
 
 
-### Improvement
-- However this project is a good opportunity to test automatic testing with pytest and github so I will try to setup such a system. 
