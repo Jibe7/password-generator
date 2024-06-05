@@ -14,6 +14,7 @@ Currently (v2) we can generate a 'customized' password. We can choose its length
 It was exactly what I wanted.
 This is the current result of this project :
 ![Version 2](v2.png)
+
 Note : last updated version is not in the .exe file but they have no differences in terms of functionnality, the code has just been 'refactored' using a class.
 
 
