@@ -1,7 +1,8 @@
-""" Module containing the password generator application.
+""" Module containing the password generator application. It can be run with no arguments which will launch the GUI application or with arguments that specify the size of the password, the type of characters (-lc for LowerCase that are present by default, -uc for UpperCase characters, -dc for DigitsCase and -sc for SpecialCase and -nlc, -nuc, -ndc, -nsc).
 
 Uses customtkinter, screeninfo, string and secrets modules.
-
+Example of use with command line argument :
+python passGen.py 40 -nlc -uc -dc # will generate a password of size 40 with uppercase and digit characters. The 40 options could go anywhere. 
 
 """
 
@@ -16,6 +17,7 @@ import secrets
 
 DEFAULT_WIDTH = 400
 DEFAULT_HEIGHT = 400
+DEFAULT_PASS_LENGTH = 15
 
 class CharactersCustomization(customtkinter.CTkFrame):
     """ Represents a toggle button on the GUI that controls an option regarding the choice of the characters included in the passwords.
@@ -110,7 +112,7 @@ class PasswordGenerator(customtkinter.CTk):
             try:
                 size = int(size)
             except:
-                size = 15
+                size = DEFAULT_PASS_LENGTH
         size = abs(size)
 
         alphabet = ""
@@ -139,6 +141,56 @@ class PasswordGenerator(customtkinter.CTk):
         self.label.insert("0.0", self.password)
         # self.label.configure(state="disabled") # enable or disable the right of the user to modify the generated password
 
+import sys
 if __name__ == "__main__":
-    app = PasswordGenerator()
-    app.mainloop()
+    passwordGenerator = PasswordGenerator()
+    if len(sys.argv) == 0:
+        passwordGenerator.mainloop()
+    else:
+        length = DEFAULT_PASS_LENGTH
+        lowerCase = True
+        upperCase = False
+        digitsCase = False
+        specialCase = False
+        for arg in sys.argv[1:]:
+            match arg:
+                case "-lc": # Lower Case
+                    lowerCase = True
+                case "-nlc": # No Lower Case
+                    lowerCase = False
+                case "-uc": # Upper Case
+                    upperCase = True
+                case "-nuc":
+                    upperCase = False
+                case "-dc": # Digits Case
+                    digitsCase = True
+                case "-ndc":
+                    digitsCase = False
+                case "-sc": # Special Case
+                    specialCase = True
+                case "-nsc":
+                    specialCase = False
+                case _:
+                    if type(arg) == int or arg.isdigit():
+                       length = arg
+                    else:
+                        raise NameError(f'Wrong Argument ! {arg=}')
+
+                
+
+        if not lowerCase and not upperCase and not digitsCase and not specialCase:
+            raise Exception("Choose at least one type of characters !")
+
+        if not lowerCase:
+            passwordGenerator.lowerCasesCheckBox.checkBox.deselect()
+        if upperCase:
+            passwordGenerator.upperCasesCheckBox.checkBox.select()
+        if digitsCase:
+            passwordGenerator.digitsCheckBox.checkBox.select()
+        if specialCase:
+            passwordGenerator.punctuationCheckBox.checkBox.select()
+        
+        passwordGenerator.basicPassGen(length)
+        new_pass = passwordGenerator.password
+
+        print(new_pass)
